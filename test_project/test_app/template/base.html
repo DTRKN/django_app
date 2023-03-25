@@ -1,0 +1,18 @@
+{% for menu_item in menu_items %}
+  <li {% if menu_item.url == request.path %}class="active"{% endif %}>
+    <a href="{{ menu_item.url }}">
+      {{ menu_item.name }}
+    </a>
+    {% if menu_item.children.count %}
+      <ul>
+        {% for child in menu_item.children.all %}
+          <li {% if child.url == request.path %}class="active"{% endif %}>
+            <a href="{{ child.url }}">
+              {{ child.name }}
+            </a>
+          </li>
+        {% endfor %}
+      </ul>
+    {% endif %}
+  </li>
+{% endfor %}
